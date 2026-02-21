@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>$BSTI Premium</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617;
+            --card: #0f172a;
+            --accent: #38bdf8;
+            --up: #10b981;
+            --down: #ef4444;
+            --border: rgba(255,255,255,0.08);
+            --text-dim: #94a3b8;
+        }
+
+        body { 
+            background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* Container Utama */
+        .app-wrapper { width: 100%; max-width: 450px; }
+
+        /* Card Grafik */
+        .market-card {
+            background: var(--card); border-radius: 28px; border: 1px solid var(--border);
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
+
+        .header { padding: 25px 20px 10px 20px; }
+        .live-label { font-size: 10px; font-weight: 800; color: var(--up); letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .symbol-title { font-size: 14px; color: #64748b; font-weight: 600; }
+        .price-main { font-size: 34px; font-weight: 800; font-family: 'JetBrains Mono'; color: white; margin-top: 5px; }
+        .stats-row { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+        
+        /* Section Sejarah (Scroll Down Area) */
+        .history-section {
+            padding: 0 10px 40px 10px;
+        }
+
+        .history-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4));
+            border: 1px solid var(--border); border-radius: 24px; padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .history-card h2 { 
+            font-size: 20px; font-weight: 800; margin-top: 0;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .history-card p {
+            font-size: 14px; line-height: 1.6; color: var(--text-dim); text-align: justify;
+        }
+
+        .founders-list {
+            margin-top: 20px; display: grid; grid-template-columns: 1fr; gap: 12px;
+        }
+
+        .founder-item {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            padding: 12px 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px;
+        }
+
+        .founder-avatar {
+            width: 35px; height: 35px; background: var(--accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px;
+        }
+
+        .founder-name { font-size: 13px; font-weight: 600; color: white; }
+        .founder-role { font-size: 10px; color: var(--accent); display: block; }
+
+        .pro-footer {
+            background: rgba(0,0,0,0.3); border-top: 1px solid var(--border);
+            padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .real-time { font-family: 'JetBrains Mono'; font-size: 14px; font-weight: 700; }
+        .date-label { font-size: 9px; color: #64748b; }
+
+        .apexcharts-toolbar { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+    <div class="market-card">
+        <div class="header">
+            <span class="live-label">● LIVE MARKET</span>
+            <div class="symbol-title">Bestie Asset ($BSTI/IDR)</div>
+            <div id="priceIDR" class="price-main">Rp 200,00</div>
+            <div id="statRow" class="stats-row" style="color: var(--up);">
+                <span id="trendIcon">▲</span> <span id="percentChange">+0.00%</span>
+            </div>
+        </div>
+
+        <div id="mainChart"></div>
+
+        <div class="pro-footer">
+            <div style="display: flex; flex-direction: column;">
+                <span class="date-label" id="dateLabel">FEB 22, 2026</span>
+                <span class="real-time" id="digitalClock">00:00:00</span>
+            </div>
+            <div style="text-align: right; font-size: 9px; color: #475569;">
+                STATUS: <span style="color:#94a3b8">1-DEV 1-ACC</span><br>
+                NETWORK: <span style="color:#94a3b8">SECURED</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <div class="history-card">
+            <h2>The Legacy of $BSTI</h2>
+            <p>
+                Terbentuk dari ikatan persaudaraan yang kuat, <b>$BSTI (Bestie Asset)</b> lahir sebagai simbol kepercayaan dan visi masa depan. Bermula dari diskusi hangat di antara para sahabat, instrumen ini kini bertransformasi menjadi saham andalan kaum <b>Gen Z</b> yang mengutamakan transparansi dan pertumbuhan berkelanjutan.
+            </p>
+            <p>
+                $BSTI bukan sekadar angka di atas grafik; ia adalah representasi dari ideologi "Bestie"—di mana setiap investor adalah bagian dari lingkaran pertemanan yang saling mendukung menuju kebebasan finansial.
+            </p>
+
+            <h3 style="font-size: 14px; color: white; margin-top: 25px;">The Founding Besties</h3>
+            <div class="founders-list">
+                <div class="founder-item">
+                    <div class="founder-avatar">AM</div>
+                    <div>
+                        <span class="founder-name">Adi Maulana</span>
+                        <span class="founder-role">Strategic Visionary</span>
+                    </div>
+                </div>
+                <div class="founder-item">
+                    <div class="founder-avatar">TR</div>
+                    <div>
+                        <span class="founder-name">T Rizki Munazar</span>
+                        <span class="founder-role">Operation & Growth</span>
+                    </div>
+                </div>
+                <div class="founder-item">
+                    <div class="founder-avatar">MS</div>
+                    <div>
+                        <span class="founder-name">M. Reza Syah Pahlevi</span>
+                        <span class="founder-role">Financial Architecture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- LOGIKA CHART & DATA (Tetap Sama Seperti Sebelumnya) ---
+    const STORAGE_KEY = 'BSTI_FINAL_DATA';
+    let dataSeries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let startPrice = dataSeries.length > 0 ? dataSeries[0].y : 200.00;
+    let lastPrice = dataSeries.length > 0 ? dataSeries[dataSeries.length - 1].y : 200.00;
+
+    if (dataSeries.length === 0) {
+        let now = new Date().getTime();
+        for (let i = 0; i < 40; i++) {
+            lastPrice += (Math.random() - 0.5) * 1.5;
+            dataSeries.push({ x: now - (40 - i) * 60000, y: parseFloat(lastPrice.toFixed(2)) });
+        }
+    }
+
+    const options = {
+        series: [{ name: 'Price', data: dataSeries }],
+        chart: {
+            type: 'area', height: 320,
+            animations: { enabled: false },
+            toolbar: { show: false },
+            panning: { enabled: true },
+            zoom: { enabled: true, type: 'x' }
+        },
+        colors: ['#38bdf8'],
+        stroke: { curve: 'smooth', width: 2.5 },
+        fill: { type: 'gradient', gradient: { opacityFrom: 0.35, opacityTo: 0.05 } },
+        xaxis: { type: 'datetime', labels: { show: true, style: { colors: '#475569', fontSize: '9px' } }, axisBorder: { show: false } },
+        yaxis: { opposite: true, labels: { style: { colors: '#475569', fontSize: '9px' }, formatter: (v) => v.toFixed(0) } },
+        grid: { borderColor: 'rgba(255,255,255,0.03)', strokeDashArray: 4 },
+        dataLabels: { enabled: false },
+        tooltip: { theme: 'dark' }
+    };
+
+    const chart = new ApexCharts(document.querySelector("#mainChart"), options);
+    chart.render();
+
+    setInterval(() => {
+        let change = (Math.random() - 0.5) * 3;
+        lastPrice += change;
+        if(lastPrice < 5) lastPrice = 5;
+        let newPoint = { x: new Date().getTime(), y: parseFloat(lastPrice.toFixed(2)) };
+        dataSeries.push(newPoint);
+        if(dataSeries.length > 1440) dataSeries.shift();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataSeries));
+        chart.updateSeries([{ data: dataSeries }], false);
+    }, 60000);
+
+    setInterval(() => {
+        let now = new Date();
+        let tick = lastPrice + (Math.random() - 0.5) * 0.3;
+        let diff = tick - startPrice;
+        let pct = (diff / startPrice) * 100;
+
+        document.getElementById('priceIDR').innerText = "Rp " + tick.toLocaleString('id-ID', { minimumFractionDigits: 2 });
+        document.getElementById('percentChange').innerText = (pct >= 0 ? "+" : "") + pct.toFixed(2) + "%";
+        document.getElementById('trendIcon').innerText = pct >= 0 ? "▲" : "▼";
+        document.getElementById('statRow').style.color = pct >= 0 ? "var(--up)" : "var(--down)";
+        document.getElementById('digitalClock').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
+        const months = ["JAN", "FEB", "MAR", "APR", "MEI", "JUN", "JUL", "AGU", "SEP", "OKT", "NOV", "DES"];
+        document.getElementById('dateLabel').innerText = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+    }, 1000);
+</script>
+
+</body>
+</html>
